@@ -2,20 +2,24 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('code clone') {
             steps {
-                echo 'Building..'
+               git branch: 'master', url: 'https://github.com/saikumarbaddapuri10/react_django_demo_app.git'
             }
         }
-        stage('Test') {
+        stage('build image') {
             steps {
-                echo 'Testing..'
+               script{
+                   sh "docker build -t ghat ."
+               }
             }
         }
-        stage('Deploy') {
+        stage('build container') {
             steps {
-                echo 'Deploying....'
+               script{
+                   sh "docker run -dt --name contghat -p 8001:8001 ghat"
+               }
             }
-        }
-    }
+        }
+    }
 }
