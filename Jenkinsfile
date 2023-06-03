@@ -17,7 +17,7 @@ pipeline {
         stage('build container') {
             steps {
                script{
-                   sh "docker run -dt --name cont -p 8002:8001 qwerty"
+                   sh "docker run -dt --name cont -p 8003:8001 qwerty"
                }
             }
         } 
